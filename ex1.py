@@ -1,2 +1,2 @@
 import streamlit as st
-st.title('나의 첫')
+st.title('나나나나나나나나나나나나나나나나나')
