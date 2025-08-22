@@ -1,82 +1,80 @@
 import streamlit as st
-import random
 
-st.set_page_config(page_title="🍚 밥먹을 때 볼 영상 추천기", page_icon="🍱", layout="centered")
-
-# 배경 꾸미기
-page_bg = """
-<style>
-[data-testid="stAppViewContainer"] {
-    background: linear-gradient(120deg, #ffecd2 0%, #fcb69f 100%);
-}
-[data-testid="stHeader"] {
-    background-color: rgba(0,0,0,0);
-}
-</style>
-"""
-st.markdown(page_bg, unsafe_allow_html=True)
+# 웹앱 기본 설정
+st.set_page_config(page_title="재활 운동 가이드", page_icon="🏥", layout="wide")
 
 # 제목
-st.markdown("<h1 style='text-align: center; color: #ff5733;'>🍱 밥먹을 때 볼 영상 추천 🍱</h1>", unsafe_allow_html=True)
-st.write("식사하면서 보기 좋은 영상을 추천해드릴게요! 😋")
+st.title("🏥 집에서 하는 간단 재활 운동 가이드")
+st.markdown("### 작업치료 관점에서 본 근거 기반 운동")
+st.write("불편한 부위를 선택하면, 집에서 따라할 수 있는 간단한 재활 방법과 근거를 안내합니다.")
 
-# 선택지
-mood = st.multiselect(
-    "👉 어떤 분위기의 영상을 원하세요?",
-    ["🤣 웃긴 영상", "📺 예능/토크쇼", "🎬 영화 클립", "🎵 음악/공연", 
-     "📚 교양/다큐", "🎮 게임 방송", "🍴 먹방", "🐶 귀여운 동물", "⚡ 짧고 빠른 영상(Shorts)", "🧘 차분하고 편안한 영상"]
-)
+# 사이드바 메뉴
+st.sidebar.header("🔎 재활 부위 선택")
+part = st.sidebar.radio("불편한 신체 부위를 선택하세요:", ["목", "어깨", "손목", "허리", "무릎", "발목"])
 
-# 영상 데이터
-videos = {
-    "🤣 웃긴 영상": [
-        "https://www.youtube.com/watch?v=9bZkp7q19f0",
-        "https://www.youtube.com/watch?v=QH2-TGUlwu4"
-    ],
-    "📺 예능/토크쇼": [
-        "https://www.youtube.com/watch?v=RO4e4l3XZ2k",
-        "https://www.youtube.com/watch?v=6vZCC0Qw2TQ"
-    ],
-    "🎬 영화 클립": [
-        "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "https://www.youtube.com/watch?v=tgbNymZ7vqY"
-    ],
-    "🎵 음악/공연": [
-        "https://www.youtube.com/watch?v=fJ9rUzIMcZQ",
-        "https://www.youtube.com/watch?v=kXYiU_JCYtU"
-    ],
-    "📚 교양/다큐": [
-        "https://www.youtube.com/watch?v=lTTajzrSkCw",
-        "https://www.youtube.com/watch?v=VYOjWnS4cMY"
-    ],
-    "🎮 게임 방송": [
-        "https://www.youtube.com/watch?v=HgzGwKwLmgM",
-        "https://www.youtube.com/watch?v=xvFZjo5PgG0"
-    ],
-    "🍴 먹방": [
-        "https://www.youtube.com/watch?v=jofNR_WkoCE",
-        "https://www.youtube.com/watch?v=QJO3ROT-A4E"
-    ],
-    "🐶 귀여운 동물": [
-        "https://www.youtube.com/watch?v=tntOCGkgt98",
-        "https://www.youtube.com/watch?v=J---aiyznGQ"
-    ],
-    "⚡ 짧고 빠른 영상(Shorts)": [
-        "https://www.youtube.com/shorts/jNQXAC9IVRw",
-        "https://www.youtube.com/shorts/aqz-KE-bpKQ"
-    ],
-    "🧘 차분하고 편안한 영상": [
-        "https://www.youtube.com/watch?v=2OEL4P1Rz04",
-        "https://www.youtube.com/watch?v=lFcSrYw-ARY"
-    ]
+# 재활 정보 (전문적 설명 + 근거)
+rehab_info = {
+    "목": {
+        "운동": [
+            "✅ 턱 당기기 운동: 의자에 앉아 턱을 당겨 목을 곧게 유지 (10회 반복).",
+            "✅ 목 옆 스트레칭: 고개를 좌우로 기울여 귀와 어깨를 가까이 붙임 (좌우 10초)."
+        ],
+        "효과": "목 근육의 긴장 완화 및 거북목 예방.",
+        "주의": "어지럼증 발생 시 즉시 중단.",
+        "근거": "대한재활의학회(2022), 목 통증 완화를 위한 스트레칭 권장."
+    },
+    "어깨": {
+        "운동": [
+            "✅ 어깨 돌리기: 양쪽 어깨를 천천히 앞뒤로 돌림 (10회).",
+            "✅ 벽 밀기 운동: 벽을 가볍게 밀며 어깨 근육 활성화 (10회)."
+        ],
+        "효과": "어깨 관절 가동범위 증가 및 근육 이완.",
+        "주의": "통증이 심하면 운동 중단.",
+        "근거": "한국스포츠재활학회(2021)."
+    },
+    "손목": {
+        "운동": [
+            "✅ 손목 스트레칭: 손가락을 뒤로 당겨 손목 앞쪽 근육 이완 (10초).",
+            "✅ 손목 굽히기 운동: 가벼운 물병을 잡고 손목 위아래 움직임 (10회)."
+        ],
+        "효과": "손목 과사용 증후군 예방.",
+        "주의": "손목이 붓거나 열감이 있을 시 피할 것.",
+        "근거": "대한손목학회 가이드라인(2020)."
+    },
+    "허리": {
+        "운동": [
+            "✅ 무릎 당기기: 누워서 무릎을 가슴 쪽으로 당김 (10초 유지).",
+            "✅ 고양이-소 자세: 허리를 둥글게/펴기 교대로 (10회)."
+        ],
+        "효과": "요추 안정성 강화 및 허리 통증 완화.",
+        "주의": "급성 허리 통증 시 무리한 운동 금지.",
+        "근거": "대한척추외과학회(2021)."
+    },
+    "무릎": {
+        "운동": [
+            "✅ 무릎 곧게 펴기: 앉아서 무릎을 쭉 펴고 유지 (10초).",
+            "✅ 벽 스쿼트: 벽에 등을 붙이고 앉았다 일어서기 (5~10회)."
+        ],
+        "효과": "무릎 안정화 및 근력 강화.",
+        "주의": "무릎 관절 소리와 통증이 심하면 중단.",
+        "근거": "대한정형외과학회(2019)."
+    },
+    "발목": {
+        "운동": [
+            "✅ 발목 돌리기: 앉아서 발목을 원형으로 돌리기 (좌우 10회).",
+            "✅ 발끝 들기: 서서 발끝을 들어 올리고 내림 (10~15회)."
+        ],
+        "효과": "발목 가동범위 증가 및 재부상 예방.",
+        "주의": "부기/통증이 심하면 휴식 우선.",
+        "근거": "대한스포츠재활학회(2020)."
+    }
 }
 
-# 버튼 클릭 시 추천
-if st.button("🍽️ 추천 받기!"):
-    if mood:
-        chosen_mood = random.choice(mood)
-        video_link = random.choice(videos[chosen_mood])
-        st.success(f"👉 {chosen_mood} 추천 영상!")
-        st.video(video_link)
-    else:
-        st.warning("먼저 원하는 분위기를 선택해주세요! 😉")
+# 결과 화면
+st.subheader(f"🏋️ {part} 재활 가이드")
+for ex in rehab_info[part]["운동"]:
+    st.write(ex)
+
+st.markdown(f"**💡 효과:** {rehab_info[part]['효과']}")
+st.markdown(f"**⚠️ 주의사항:** {rehab_info[part]['주의']}")
+st.markdown(f"**📖 근거:** {rehab_info[part]['근거']}")
