@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="스트레칭 도우미", page_icon="🧘", layout="centered")
 
-st.markdown("<h1 style='text-align: center; color:#4CAF50;'>🧘 집에서 하는 맞춤 스트레칭 가이드</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color:#4CAF50;'>🧘 스트레칭 가이드</h1>", unsafe_allow_html=True)
 st.write("---")
 
 # 부위 선택
